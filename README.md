@@ -373,7 +373,7 @@ max_order_size_by_value = max_order_value / mid_price
 return min(dynamic_size, max_order_size, max_order_size_by_value)
 def adjust_gamma(base_gamma, time_elapsed, total_time): remaining_time_fraction = (total_time - time_elapsed) / total_time return base_gamma * remaining_time_fraction
 
-def calculate_execution_probability(distance, model_params): decay_rate = model_params.get('decay_rate', 0.04690431519695075) probability = np.exp(-decay_rate * abs(distance)) return probability
+def calculate_execution_probability(distance, model_params): decay_rate = model_params.get('decay_rate', 0.007655795437145341) probability = np.exp(-decay_rate * abs(distance)) return probability
 
 model_params = {'decay_rate': 0.007655795437145341} market_params = {'impact_factor': 0.657692307692345}
 
