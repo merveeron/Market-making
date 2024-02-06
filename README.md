@@ -225,7 +225,7 @@ def run(self):
             
     time.sleep(60)
 frozen_inventory_amount = 0.01
-bot = TradingBot( 'BTC/USDT', spread=0.005, order_quantity=0.001, alpha=0.5, T=60*30, initial_inventory=0.05, frozen_inventory=frozen_inventory_amount ) mid_prices, bid_prices, ask_prices, pnl_records, inventory_records = bot.run()
+bot = TradingBot( 'BTC/USDT', spread=0.005, order_quantity=0.001, alpha=0.01, T=60*30, initial_inventory=0.05, frozen_inventory=frozen_inventory_amount ) mid_prices, bid_prices, ask_prices, pnl_records, inventory_records = bot.run()
 
 #MARKET IMPACT, DECAY RATE
 
@@ -375,11 +375,16 @@ def adjust_gamma(base_gamma, time_elapsed, total_time): remaining_time_fraction 
 
 def calculate_execution_probability(distance, model_params): decay_rate = model_params.get('decay_rate', 0.007655795437145341) probability = np.exp(-decay_rate * abs(distance)) return probability
 
+def calculate_market_impact(order_size, market_params):
+    impact_factor = market_params.get('impact_factor', 0.657692307692345) 
+    impact = order_size * impact_factor
+    return impact
+
 model_params = {'decay_rate': 0.007655795437145341} market_params = {'impact_factor': 0.657692307692345}
 
 def run_strategy(initial_inventory=0.05): T = 60 current_inventory = initial_inventory current_pnl = 0 total_pnl = 0 base_gamma = 0.1 kappa = 1.5 max_inventory = 10 T_minus_t = T
 
-alpha = 
+alpha = 0.01
 utility_record = []
 
 mid_prices, bid_prices, ask_prices, inventory_levels, pnl_records = [], [], [], [], []
