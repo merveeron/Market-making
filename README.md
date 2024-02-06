@@ -40,7 +40,7 @@ display_dates = ['2024-01-01', '2024-01-09', '2024-01-12'] plot_data_with_events
 class TradingBot: def init(self, symbol, spread, order_quantity, alpha, T, initial_inventory, frozen_inventory): self.symbol = symbol self.spread = spread self.order_quantity = order_quantity self.inventory = initial_inventory
 self.frozen_inventory = frozen_inventory self.active_inventory = initial_inventory - frozen_inventory
 self.exchange = ccxt.binance({ 'apiKey': '', 'secret': '', 'enableRateLimit': True, 'options': { 'defaultType': 'spot' } }) self.exchange.set_sandbox_mode(True) self.total_cost = 0 self.total_revenue = 0 self.alpha = alpha
-self.T = T # Terminal time self.market_volatility = 0.1
+self.T = T self.market_volatility = 0.1
 self.total_orders_placed = 0 self.total_orders_executed = 0 self.total_orders = 0 self.filled_orders = 0 self.partially_filled_orders = 0 self.open_orders = 0 self.start_time = time.time() self.pnl_records = [] self.inventory_records = [] self.mid_prices = [] self.bid_prices = [] self.ask_prices = []
 
 def print_order_details(self, order, order_type):
